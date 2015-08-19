@@ -26,5 +26,8 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "base64url": "^1.0.4"
   }
 }
