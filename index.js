@@ -1,3 +1,6 @@
+var jwa = require("./lib/jwa");
+var jwk = require("./lib/jwk");
+
 module.exports = {
-	jwa: require('./lib/jwa')
+	"jwa": jwa
 };
