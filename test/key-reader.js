@@ -3,7 +3,7 @@ var expect = require("chai").expect;
 var reader = require("../lib/key-reader");
 
 describe("keyReader", function() {
-	describe("#readBer", function() {
+	describe.skip("#readBer", function() {
 		it("should return a proper BER object", function() {
 			var buf = new Buffer(7);
 			buf[0] = 0x04;
@@ -101,5 +101,9 @@ describe("keyReader", function() {
 			function fn() { var ber = reader.readBer(buf); };
 			expect(fn).to.throw(TypeError);
 		});
+	});
+
+	describe("#parseTag", function() {
+
 	});
 });
