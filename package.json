@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "test-watch": "mocha -w"
+    "test-watch": "mocha -w -R dot"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,5 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
-    "base64url": "^1.0.4",
-    "buffer-equal-constant-time": "^1.0.1"
   }
 }
