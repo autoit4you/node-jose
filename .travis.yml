@@ -4,3 +4,5 @@ node_js:
   - "0.10"
   - "iojs-3.0.0"
   - "iojs-3.1.0"
+script: "npm run test-ci"
+after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"

@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "test-ci": "istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec",
+    "test-cov": "istanbul cover ./node_modules/.bin/_mocha -- -R spec",
     "test-watch": "mocha -w -R dot"
   },
   "repository": {
@@ -26,8 +28,8 @@
   "homepage": "https://github.com/autoit4you/node-jose#readme",
   "devDependencies": {
     "chai": "^3.2.0",
+    "istanbul": "^0.3.18",
     "mocha": "^2.2.5"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
