@@ -8,5 +8,10 @@ describe("base64url", function() {
 			var url = base64url.fromBase64("Zm9vYg==");
 			expect(url).to.equal("Zm9vYg");
 		});
+
+		it("should convert a base64url string into an base64 string", function() {
+			var url = base64url.toBase64("Zm9vYg");
+			expect(url).to.equal("Zm9vYg==");
+		});
 	});
 });
