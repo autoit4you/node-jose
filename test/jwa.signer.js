@@ -87,4 +87,38 @@ describe("jwa", function() {
 			});
 		});
 	});
+
+	[256, 384, 512].forEach(function(bits) {
+		describe("ES" + bits, function() {
+			var privKey = [];
+			var pubKey = [];
+			before(function() {
+				alg = jwa("ES" + bits);
+				privKey[0] = fs.readFileSync("test/ec" + bits + "-private.pem");
+				privKey[1] = fs.readFileSync("test/ec" + bits + "-private2.pem");
+				pubKey[0] = fs.readFileSync("test/ec" + bits + "-public.pem");
+				pubKey[1] = fs.readFileSync("test/ec" + bits + "-public2.pem");
+			});
+
+			it("should create a non-empty string as signature", function() {
+				var signature = alg.sign("123456", privKey[0]);
+				expect(signature).to.not.be.null;
+			});
+
+			it("should verify a signature which was created with the same input and secret", function() {
+				var signature = alg.sign("123456", privKey[0]);
+				expect(alg.verify("123456", signature, pubKey[0])).to.be.true;
+			});
+
+			it("shouldnt verify a wrong signature", function() {
+				var signature = alg.sign("1234567", privKey[0]);
+				expect(alg.verify("123456", signature, pubKey[0])).to.be.false;
+			});
+
+			it("shouldnt verify with a wrong secret", function() {
+				var signature = alg.sign("123456", privKey[0]);
+				expect(alg.verify("123456", signature, pubKey[1])).to.be.false;
+			});
+		});
+	});
 });
