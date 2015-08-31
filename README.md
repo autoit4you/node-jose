@@ -34,7 +34,7 @@ supported.
 Creates a new `jwa` object with `sign` and `verify` methods, depending 
 on the specified algorithm. Valid values for `algorithm` can be found 
 in the above table and are case-sensitive. Passing an invalid algorithm 
-throws and `TypeError`.
+will throw a `TypeError`.
 
 #### Example:
 ```js
@@ -45,6 +45,9 @@ var hs256 = jose.jwa('HS256');
 ### jwa.sign(input, secretOrPrivateKey)
 Sign `input` with either a secret using a HMAC algorithm or
 a private key using a digital signature algorithm.
+
+If `input` is neither a string nor a buffer, 
+it will be stringified using `JSON.stringify`.
 
 When using a HMAC algorithm `secretOrPrivateKey` should be either a
 string or a buffer. When using a digital signature algorithm, the
