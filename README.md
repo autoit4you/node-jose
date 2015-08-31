@@ -1,6 +1,7 @@
 # jose
 
-Build Status
+[![Build](https://travis-ci.org/autoit4you/node-jose.svg?branch=master)](https://travis-ci.org/autoit4you/node-jose)
+[![Coverage](https://coveralls.io/repos/autoit4you/node-jose/badge.svg?branch=master&service=github)](https://coveralls.io/github/autoit4you/node-jose?branch=master)
 
 JSON Object Signing and Encryption (JOSE) library (symmetric and asymmetric)
 

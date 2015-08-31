@@ -21,7 +21,7 @@
     "jwt",
     "jwa"
   ],
-  "author": "Jonathan Horn",
+  "author": "Jonathan Horn <info@autoit4you.de>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/autoit4you/node-jose/issues"
