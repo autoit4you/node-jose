@@ -41,3 +41,21 @@ throws and `TypeError`.
 var jose = require('jose');
 var hs256 = jose.jwa('HS256');
 ```
+
+### jwa.sign(input, secretOrPrivateKey)
+Sign `input` with either a secret using a HMAC algorithm or
+a private key using a digital signature algorithm.
+
+When using a HMAC algorithm `secretOrPrivateKey` should be either a
+string or a buffer. When using a digital signature algorithm, the
+value should be a PEM encoded *private* key.
+
+Returns the signature in [base64url](https://en.wikipedia.org/wiki/Base64#URL_applications) format.
+
+#### Example:
+```js
+var jose = require('jose');
+var hs256 = jose.jwa('HS256');
+var signature = hs256.sign("input", "secret");
+console.log(signature); // Prints 'jYmF0Et6vTLLqjd5o9qgGeDSaaIq7BWvjnKW9wLMaMY'
+```
