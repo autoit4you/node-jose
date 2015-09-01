@@ -43,8 +43,10 @@ var hs256 = jose.jwa('HS256');
 ```
 
 ### jwa.sign(input, secretOrPrivateKey)
+*This method is only available to algorithms for digital signatures and MACs.*
+
 Sign `input` with either a secret using a HMAC algorithm or
-a private key using a digital signature algorithm.
+a *private* key using a digital signature algorithm.
 
 If `input` is neither a string nor a buffer, 
 it will be stringified using `JSON.stringify`.
@@ -59,6 +61,30 @@ Returns the signature in [base64url](https://en.wikipedia.org/wiki/Base64#URL_ap
 ```js
 var jose = require('jose');
 var hs256 = jose.jwa('HS256');
-var signature = hs256.sign("input", "secret");
+var signature = hs256.sign('input', 'secret');
 console.log(signature); // Prints 'jYmF0Et6vTLLqjd5o9qgGeDSaaIq7BWvjnKW9wLMaMY'
+```
+
+### jwa.verify(input, signature, secretOrPublicKey)
+*This method is only available to algorithms for digital signatures and MACs.*
+
+Verify that `signature` is a valid signature for `input` using 
+a secret for HMAC algorithms or a *public* key for 
+digital signature algorithms.
+
+If `input` is neither a string nor a buffer,
+it will be stringified using `JSON.stringify`.
+
+When using a HMAC algorithm `secretOrPublicKey` should be either a
+string or a buffer. Whenn using a digital signature algorithm, the
+value should be a PEM encoded *public* key.
+
+Returns a boolean indicating whether or not the signature is valid.
+
+#### Example:
+```s
+var jose = require('jose');
+var hs256 = jose.jwa('HS256');
+var isValid = hs256.verify('input', 'jYmF0Et6vTLLqjd5o9qgGeDSaaIq7BWvjnKW9wLMaMY', 'secret');
+console.log(isValid); // Prints 'true'
 ```
