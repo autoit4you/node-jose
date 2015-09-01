@@ -82,7 +82,7 @@ value should be a PEM encoded *public* key.
 Returns a boolean indicating whether or not the signature is valid.
 
 #### Example:
-```s
+```js
 var jose = require('jose');
 var hs256 = jose.jwa('HS256');
 var isValid = hs256.verify('input', 'jYmF0Et6vTLLqjd5o9qgGeDSaaIq7BWvjnKW9wLMaMY', 'secret');
