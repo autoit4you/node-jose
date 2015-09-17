@@ -11,7 +11,7 @@ describe("jwa", function() {
 			});
 
 			it("should create an object with the ciphertext and tag", function() {
-				var enc = alg.encrypt("top secret", "aad", new Buffer(96), new Buffer(bits));
+				var enc = alg.encrypt("top secret", new Buffer("aad"), new Buffer(12), new Buffer(bits/8));
 				expect(enc).to.have.all.keys("cipher", "tag");
 			});
 		});
@@ -30,15 +30,15 @@ describe("jwa", function() {
 });
 //For testing with jose4j
 /*it("tests", function() {
-	alg = jwa("A128CBC-HS256");
+	alg = jwa("A128GCM");
 	var plain = new Buffer(128);
 	plain.fill(0);
 	var aad = new Buffer(3);
 	aad.fill(0);
-	var iv = new Buffer(16);
+	var iv = new Buffer(12);
 
 	iv.fill(0);
-	var key = new Buffer(32);
+	var key = new Buffer(16);
 	key.fill(0);
 	var enc = alg.encrypt(plain, aad, iv, key);
 	
