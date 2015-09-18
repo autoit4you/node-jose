@@ -2,19 +2,22 @@
 var expect = require("chai").expect;
 var jwa = require("../lib/jwa/jwa");
 var alg;
+var version = process.version.split(".");
 
 describe("jwa", function() {
 	[128, 192, 256].forEach(function(bits) {
-		describe("A" + bits + "GCM", function() {
-			before(function() {
-				alg = jwa("A" + bits + "GCM");
-			});
+		if(version[0] > 0 || version[1] > 10) {
+			describe("A" + bits + "GCM", function() {
+				before(function() {
+					alg = jwa("A" + bits + "GCM");
+				});
 
-			it("should create an object with the ciphertext and tag", function() {
-				var enc = alg.encrypt("top secret", new Buffer("aad"), new Buffer(12), new Buffer(bits/8));
-				expect(enc).to.have.all.keys("cipher", "tag");
+				it("should create an object with the ciphertext and tag", function() {
+					var enc = alg.encrypt("top secret", new Buffer("aad"), new Buffer(12), new Buffer(bits/8));
+					expect(enc).to.have.all.keys("cipher", "tag");
+				});
 			});
-		});
+		}
 
 		describe("A" + bits + "CBC-HS" + (bits*2), function() {
 			before(function() {
