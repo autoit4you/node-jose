@@ -2,7 +2,8 @@ language: node_js
 node_js:
   - "0.12"
   - "0.10"
-  - "iojs-3.2.0"
+  - "iojs-3"
+  - "4"
 before_script: "make"
 script: "npm run test-ci"
 after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"
