@@ -16,7 +16,7 @@ describe("jwa", function() {
 				expect(enc).to.have.all.keys("cipher", "tag");
 			});
 
-			/*it("should properly encrypt and decrypt", function() {
+			it("should properly encrypt and decrypt", function() {
 				var plain = new Buffer("secret");
 				var aad = new Buffer("aad");
 				var iv = new Buffer(12);
@@ -25,7 +25,17 @@ describe("jwa", function() {
 				var dec = alg.decrypt(enc.cipher, enc.tag, aad, iv, key);
 				expect(Buffer.isBuffer(dec)).to.be.true;
 				expect(plain).to.deep.equal(dec);
-			});*/
+			});
+
+			it("should fail the decryption with an invalid tag", function() {
+				var plain = new Buffer("secret");
+				var aad = new Buffer("aad");
+				var iv = new Buffer(12);
+				var key = new Buffer(bits/8);
+				var enc = alg.encrypt(plain, aad, iv, key);
+				enc.tag[0] = enc.tag[0] ^ 1;
+				expect(alg.decrypt.bind(null, enc.cipher, enc.tag, aad, iv, key)).to.throw(Error);
+			});
 		});
 
 		describe("A" + bits + "CBC-HS" + (bits*2), function() {
