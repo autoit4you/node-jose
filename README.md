@@ -112,7 +112,24 @@ with the authentication tag, both being a `Buffer`.
 ```js
 var jose = require('jose');
 var aes = jose.jwa('A256GCM');
-var enc = aes.encrypt('secret', new Buffer('aad'), new Buffer(12), new Buffer(32));
+var enc = aes.encrypt('secret', aad, iv, key);
 console.log(enc.cipher); // Prints Buffer <5F, ...
 console.log(enc.tag); // Prints Buffer <9E, ...
+```
+
+### jwa.decrypt(ciphertext, tag, aad, iv, key)
+*This method is only available to algorithms for content encryption.*
+
+Authenticate and decrypt `ciphertext` using `tag`, `aad`, `iv` and `key`.
+
+All parameters must be `Buffer`s.
+
+Returns a `Buffer` containing the decrypted plaintext. Throws an
+Error if the `ciphertext` can't be authenticated.
+
+```js
+var jose = require('jose');
+var aes = jose.jwa('A256GCM');
+var plain = aes.encrypt(ciphertext, tag, aad, iv, key);
+console.log(plain); // Prints Buffer <F9, ...
 ```
