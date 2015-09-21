@@ -10,7 +10,7 @@ The implementation of the
 with [JSON Web Signatures](https://tools.ietf.org/html/rfc7515) or 
 [JSON Web Encryption](https://tools.ietf.org/html/rfc7516).
 
-The following cryptographic algorithms are supported for JWS:
+The following digital signature/MAC algorithms are supported:
 
 "alg" Header Parameter | Digital Signature or MAC Algorithm
 -----------------|-----------------------------------
@@ -24,6 +24,8 @@ ES256 | ECDSA using P-256 curve and SHA-256 hash algorithm
 ES384 | ECDSA using P-384 curve and SHA-384 hash algorithm
 ES512 | ECDSA using P-521 curve and SHA-512 hash algorithm
 none | No integrity protection
+
+The following content encryption algorithms are supported:
 
 "enc" Header Parameter | Content Encryption Algorithm
 -----------------|-----------------------------------------
