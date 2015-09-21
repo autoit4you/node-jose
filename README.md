@@ -25,11 +25,20 @@ ES384 | ECDSA using P-384 curve and SHA-384 hash algorithm
 ES512 | ECDSA using P-521 curve and SHA-512 hash algorithm
 none | No integrity protection
 
-Currently no key encryption and content encryption algorithms are
+"enc" Header Parameter | Content Encryption Algorithm
+-----------------|-----------------------------------------
+A128CBC-HS256 | AES CBC using 128-bit key with SHA-256 as HMAC
+A192CBC-HS384 | AES CBC using 192-bit key with SHA-384 as HMAC
+A256CBC-HS512 | AES CBC using 256-bit key with SHA-512 as HMAC
+A128GCM | AES GCM using 128-bit key
+A192GCM | AES GCM using 192-bit key
+A256GCM | AES GCM using 256-bit key
+
+Currently no key encryption algorithms are
 supported.
 
 ### jwa(algorithm)
-Creates a new `jwa` object with `sign` and `verify` methods, depending 
+Creates a new `jwa` object with `sign` and `verify` or `encrypt` and `decrypt` methods, depending 
 on the specified algorithm. Valid values for `algorithm` can be found 
 in the above table and are case-sensitive. Passing an invalid algorithm 
 will throw a `TypeError`.
@@ -85,4 +94,25 @@ var jose = require('jose');
 var hs256 = jose.jwa('HS256');
 var isValid = hs256.verify('input', 'jYmF0Et6vTLLqjd5o9qgGeDSaaIq7BWvjnKW9wLMaMY', 'secret');
 console.log(isValid); // Prints 'true'
+```
+
+### jwa.encrypt(plaintext, aad, iv, key)
+*This method is only available to algorithms for content encryption.*
+
+Encrypt `plaintext` and compute an authentication tag using `aad`,
+`iv` and `key`.
+
+All parameters must be `Buffer`s except `plaintext` which can
+also be a `string`.
+
+Returns an object containing `cipher` with the ciphertext and `tag`
+with the authentication tag, both being a `Buffer`.
+
+#### Example:
+```js
+var jose = require('jose');
+var aes = jose.jwa('A256GCM');
+var enc = aes.encrypt('secret', new Buffer('aad'), new Buffer(12), new Buffer(32));
+console.log(enc.cipher); // Prints Buffer <5F, ...
+console.log(enc.tag); // Prints Buffer <9E, ...
 ```
