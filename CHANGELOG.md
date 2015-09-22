@@ -1,5 +1,33 @@
 # jose ChangeLog
 
+## 2015-09-22, Version 0.2.0
+
+### Notable Changes
+
+* **jwa**:
+  - Added support for all Content Encryption Algorithms specified in the JWA RFC
+
+### Known Issues
+
+None
+
+### Commits
+
+* [`945d586`] Preparing 0.2.0 release
+* [`1d4f28f`] Added changelog
+* [`48497ef`] Corrected error in README
+* [`6e26988`] Added decrypt section to README
+* [`60c6230`] Added encrypt section to README
+* [`671368c`] Implemented decrypting using AES-GCM
+* [`22545a6`] Implemented decrypting AES-CBC
+* [`819af8a`] Drop support for 0.10
+* [`2ad8eae`] Adjust build versions
+* [`d0f6653`] Fix build failure on 0.10
+* [`a66c086`] Fixed AES-GCM encryption
+* [`f6e05c0`] Started work on Content Encryption Algorithms
+* [`8300488`] Added bn.js to dependencies
+* [`052d60d`] Removed unneccessary title
+
 ## 2015-09-01, Version 0.1.0
 
 ### Notable Changes
