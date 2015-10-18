@@ -70,8 +70,8 @@ Returns the signature in [base64url](https://en.wikipedia.org/wiki/Base64#URL_ap
 ```js
 var jose = require('jose');
 var hs256 = jose.jwa('HS256');
-var signature = hs256.sign('input', 'secret');
-console.log(signature); // Prints 'jYmF0Et6vTLLqjd5o9qgGeDSaaIq7BWvjnKW9wLMaMY'
+var signature = hs256.sign(input, 'secret');
+console.log(signature); // Prints Buffer <8C, ...
 ```
 
 ### jwa.verify(input, signature, secretOrPublicKey)
@@ -85,7 +85,7 @@ If `input` is neither a string nor a buffer,
 it will be stringified using `JSON.stringify`.
 
 When using a HMAC algorithm `secretOrPublicKey` should be either a
-string or a buffer. Whenn using a digital signature algorithm, the
+string or a buffer. When using a digital signature algorithm, the
 value should be a PEM encoded *public* key.
 
 Returns a boolean indicating whether or not the signature is valid.
@@ -94,7 +94,7 @@ Returns a boolean indicating whether or not the signature is valid.
 ```js
 var jose = require('jose');
 var hs256 = jose.jwa('HS256');
-var isValid = hs256.verify('input', 'jYmF0Et6vTLLqjd5o9qgGeDSaaIq7BWvjnKW9wLMaMY', 'secret');
+var isValid = hs256.verify(input, signature, 'secret');
 console.log(isValid); // Prints 'true'
 ```
 

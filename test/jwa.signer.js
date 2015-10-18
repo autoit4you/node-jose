@@ -10,19 +10,25 @@ describe("jwa", function() {
 			alg = jwa("none");
 		});
 
-		it("should create an empty string as signature", function() {
-			var signature = alg.sign("123456", "secret");
+		it("should create an empty buffer as signature", function() {
+			var input = new Buffer(6);
+			input.fill(0);
+			var signature = alg.sign(input, "secret");
 			expect(signature).to.not.be.null;
-			expect(signature).to.equal("");
+			expect(Buffer.isBuffer(signature)).to.be.true;
 			expect(signature).to.have.length(0);
 		});
 
-		it("should verify an empty signature as valid", function() {
-			expect(alg.verify("123456", "", "secret")).to.be.true;
+		it("should verify an zero-length buffer signature as valid", function() {
+			var input = new Buffer(6);
+			input.fill(0);
+			expect(alg.verify(input, new Buffer(0), "secret")).to.be.true;
 		});
 
-		it("shouldn't verify a non-empty signature as valid", function() {
-			expect(alg.verify("123456", "1", "secret")).to.be.false;
+		it("shouldn't verify a non-zero-length buffer signature as valid", function() {
+			var input = new Buffer(6);
+			input.fill(0);
+			expect(alg.verify(input, new Buffer(1), "secret")).to.be.false;
 		});
 	});
 
@@ -32,24 +38,35 @@ describe("jwa", function() {
 				alg = jwa("HS" + bits);
 			});
 
-			it("should create a non-empty string as signature", function() {
-				var signature = alg.sign("123456", "secret");
+			it("should create a non-empty buffer as signature", function() {
+				var input = new Buffer(6);
+				input.fill(0);
+				var signature = alg.sign(input, "secret");
 				expect(signature).to.not.be.null;
+				expect(Buffer.isBuffer(signature)).to.be.true;
 			});
 
 			it("should verify a signature which was created with the same input and secret", function() {
-				var signature = alg.sign("123456", "secret");
-				expect(alg.verify("123456", signature, "secret")).to.be.true;
+				var input = new Buffer(6);
+				input.fill(0);
+				var signature = alg.sign(input, "secret");
+				expect(alg.verify(input, signature, "secret")).to.be.true;
 			});
 
 			it("shouldnt verify a wrong signature", function() {
-				var signature = alg.sign("1234567", "secret");
-				expect(alg.verify("123456", signature, "secret")).to.be.false;
+				var input1 = new Buffer(6);
+				input1.fill(0);
+				var input2 = new Buffer(6);
+				input2.fill(1);
+				var signature = alg.sign(input1, "secret");
+				expect(alg.verify(input2, signature, "secret")).to.be.false;
 			});
 
 			it("shouldnt verify with a wrong secret", function() {
-				var signature = alg.sign("123456", "secret");
-				expect(alg.verify("123456", signature, "secret2")).to.be.false;
+				var input = new Buffer(6);
+				input.fill(0);
+				var signature = alg.sign(input, "secret");
+				expect(alg.verify(input, signature, "secret2")).to.be.false;
 			});
 		});
 	});
@@ -66,24 +83,35 @@ describe("jwa", function() {
 				pubKey[1] = fs.readFileSync("test/rsa-public2.pem");
 			});
 
-			it("should create a non-empty string as signature", function() {
-				var signature = alg.sign("123456", privKey[0]);
+			it("should create a non-empty buffer as signature", function() {
+				var input = new Buffer(6);
+				input.fill(0);
+				var signature = alg.sign(input, privKey[0]);
 				expect(signature).to.not.be.null;
+				expect(Buffer.isBuffer(signature)).to.be.true;
 			});
 
 			it("should verify a signature which was created with the same input and secret", function() {
-				var signature = alg.sign("123456", privKey[0]);
-				expect(alg.verify("123456", signature, pubKey[0])).to.be.true;
+				var input = new Buffer(6);
+				input.fill(0);
+				var signature = alg.sign(input, privKey[0]);
+				expect(alg.verify(input, signature, pubKey[0])).to.be.true;
 			});
 
 			it("shouldnt verify a wrong signature", function() {
-				var signature = alg.sign("1234567", privKey[0]);
-				expect(alg.verify("123456", signature, pubKey[0])).to.be.false;
+				var input1 = new Buffer(6);
+				input1.fill(0);
+				var input2 = new Buffer(6);
+				input2.fill(1);
+				var signature = alg.sign(input1, privKey[0]);
+				expect(alg.verify(input2, signature, pubKey[0])).to.be.false;
 			});
 
 			it("shouldnt verify with a wrong secret", function() {
-				var signature = alg.sign("123456", privKey[0]);
-				expect(alg.verify("123456", signature, pubKey[1])).to.be.false;
+				var input = new Buffer(6);
+				input.fill(0);
+				var signature = alg.sign(input, privKey[0]);
+				expect(alg.verify(input, signature, pubKey[1])).to.be.false;
 			});
 		});
 	});
@@ -100,24 +128,35 @@ describe("jwa", function() {
 				pubKey[1] = fs.readFileSync("test/ec" + bits + "-public2.pem");
 			});
 
-			it("should create a non-empty string as signature", function() {
-				var signature = alg.sign("123456", privKey[0]);
+			it("should create a non-empty buffer as signature", function() {
+				var input = new Buffer(6);
+				input.fill(0);
+				var signature = alg.sign(input, privKey[0]);
 				expect(signature).to.not.be.null;
+				expect(Buffer.isBuffer(signature)).to.be.true;
 			});
 
 			it("should verify a signature which was created with the same input and secret", function() {
-				var signature = alg.sign("123456", privKey[0]);
-				expect(alg.verify("123456", signature, pubKey[0])).to.be.true;
+				var input = new Buffer(6);
+				input.fill(0);
+				var signature = alg.sign(input, privKey[0]);
+				expect(alg.verify(input, signature, pubKey[0])).to.be.true;
 			});
 
 			it("shouldnt verify a wrong signature", function() {
-				var signature = alg.sign("1234567", privKey[0]);
-				expect(alg.verify("123456", signature, pubKey[0])).to.be.false;
+				var input1 = new Buffer(6);
+				input1.fill(0);
+				var input2 = new Buffer(6);
+				input2.fill(1);
+				var signature = alg.sign(input1, privKey[0]);
+				expect(alg.verify(input2, signature, pubKey[0])).to.be.false;
 			});
 
 			it("shouldnt verify with a wrong secret", function() {
-				var signature = alg.sign("123456", privKey[0]);
-				expect(alg.verify("123456", signature, pubKey[1])).to.be.false;
+				var input = new Buffer(6);
+				input.fill(0);
+				var signature = alg.sign(input, privKey[0]);
+				expect(alg.verify(input, signature, pubKey[1])).to.be.false;
 			});
 		});
 	});
