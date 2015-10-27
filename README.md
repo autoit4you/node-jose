@@ -57,14 +57,13 @@ var hs256 = jose.jwa('HS256');
 Sign `input` with either a secret using a HMAC algorithm or
 a *private* key using a digital signature algorithm.
 
-If `input` is neither a string nor a buffer, 
-it will be stringified using `JSON.stringify`.
+`input` must be a buffer.
 
 When using a HMAC algorithm `secretOrPrivateKey` should be either a
 string or a buffer. When using a digital signature algorithm, the
 value should be a PEM encoded *private* key.
 
-Returns the signature in [base64url](https://en.wikipedia.org/wiki/Base64#URL_applications) format.
+Returns the signature as buffer.
 
 #### Example:
 ```js
@@ -81,8 +80,7 @@ Verify that `signature` is a valid signature for `input` using
 a secret for HMAC algorithms or a *public* key for 
 digital signature algorithms.
 
-If `input` is neither a string nor a buffer,
-it will be stringified using `JSON.stringify`.
+`input` must be a buffer.
 
 When using a HMAC algorithm `secretOrPublicKey` should be either a
 string or a buffer. When using a digital signature algorithm, the
