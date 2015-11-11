@@ -68,7 +68,7 @@ Returns the signature as buffer.
 #### Example:
 ```js
 var jose = require('jose');
-var hs256 = jose.jwa('HS256');
+var hs256 = new jose.jwa('HS256');
 var signature = hs256.sign(input, 'secret');
 console.log(signature); // Prints Buffer <8C, ...
 ```
@@ -91,7 +91,7 @@ Returns a boolean indicating whether or not the signature is valid.
 #### Example:
 ```js
 var jose = require('jose');
-var hs256 = jose.jwa('HS256');
+var hs256 = new jose.jwa('HS256');
 var isValid = hs256.verify(input, signature, 'secret');
 console.log(isValid); // Prints 'true'
 ```
@@ -111,7 +111,7 @@ with the authentication tag, both being a `Buffer`.
 #### Example:
 ```js
 var jose = require('jose');
-var aes = jose.jwa('A256GCM');
+var aes = new jose.jwa('A256GCM');
 var enc = aes.encrypt('secret', aad, iv, key);
 console.log(enc.cipher); // Prints Buffer <5F, ...
 console.log(enc.tag); // Prints Buffer <9E, ...
@@ -129,7 +129,7 @@ Error if the `ciphertext` can't be authenticated.
 
 ```js
 var jose = require('jose');
-var aes = jose.jwa('A256GCM');
+var aes = new jose.jwa('A256GCM');
 var plain = aes.encrypt(ciphertext, tag, aad, iv, key);
 console.log(plain); // Prints Buffer <F9, ...
 ```
