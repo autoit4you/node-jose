@@ -41,13 +41,5 @@ describe("jwa", function() {
 			var mgmtKey = new Buffer(16);
 			expect(function(){alg.unwrapKey(encKey, mgmtKey);}).to.throw(/encKey must have a length of zero/);
 		});
-
-		it.skip("shouldn't be able to unwrap a key with the wrong key", function() {
-			var contentKey = new Buffer(0);
-			var mgmtKey = new Buffer(16);
-			var mgmtKey2 = new Buffer(16);
-			var enc = alg.wrapKey(contentKey, mgmtKey);
-			expect(function() {alg.unwrapKey(enc, mgmtKey2);}).to.throw(Error);
-		});
 	});
 });
