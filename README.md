@@ -127,9 +127,33 @@ All parameters must be `Buffer`s.
 Returns a `Buffer` containing the decrypted plaintext. Throws an
 Error if the `ciphertext` can't be authenticated.
 
+#### Example:
 ```js
 var jose = require('jose');
 var aes = new jose.jwa('A256GCM');
 var plain = aes.encrypt(ciphertext, tag, aad, iv, key);
 console.log(plain); // Prints Buffer <F9, ...
+```
+
+### jwa.wrapKey(keyToWrap, key[, options])
+*This method is only available to algorithms for key encryption.*
+
+Wraps the `keyToWrap` with a key suitable to the used algorithm,
+as defined by RFC7518. `options` may have to be provided, 
+depending on the algorithm used for wrapping.
+
+`keyToWrap` must be a `Buffer`.
+`key` must be of an type that the used algorithm accepts.
+`options`, if provided, must be an object.
+
+Returns an object containing `keydata`, which is a `Buffer`, 
+and possibly further arguments that are needed to unwrap the key again 
+(see supported algorithms table).
+
+#### Example:
+```js
+var jose = require('jose');
+var rsa = new jose.jwa('RSA1_5');
+var wrapped = rsa.wrapKey(keyToWrap, key);
+console.log(wrapped.keydata); // Prints Buffer <58, ...
 ```
