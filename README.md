@@ -157,3 +157,24 @@ var rsa = new jose.jwa('RSA1_5');
 var wrapped = rsa.wrapKey(keyToWrap, key);
 console.log(wrapped.keydata); // Prints Buffer <58, ...
 ```
+
+### jwa.unwrapKey(keyToUnwrap, key[, options])
+*This method is only available to algorithms for key encryption.*
+
+Unwraps the `keyToUnwrap` with a key suitable to the used algorithm,
+as defined by RFC7518. `options` may have to be provided, 
+depending on the algorithm used for unwrapping.
+
+`keyToUnwrap` must be a `Buffer`.
+`key` must be of an type that the used algorithm accepts.
+`options`, if provided, must be an object.
+
+Returns a `Buffer`, which is the unwrapped key.
+
+#### Example:
+```js
+var jose = require('jose');
+var rsa = new jose.jwa('RSA1_5');
+var unwrapped = rsa.unwrapKey(keytoUnwrap, key);
+console.log(unwrapped); // Prints Buffer <A7, ...
+```
