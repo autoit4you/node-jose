@@ -1,5 +1,31 @@
 # jose ChangeLog
 
+## 2015-12-01, Version 0.3.0
+
+### Notable Changes
+
+* **jwa**:
+  - Added support for the Key Encryption Algorithms RSA1_5, dir, A128KWGCM, 
+      A192KWGCM and A256KWGCM, as specified in the JWA RFC
+  - The signature algorithms now return and expect buffers instead of 
+      Base64Url-encoded strings
+
+### Known Issues
+
+None
+
+### Commits
+
+* [`dd9c2db`] Added documentation for jwa.unwrapKey
+* [`678e50f`] Added documentation for jwa.wrapKey
+* [`3b73781`] Added support for A*KWGCM and RSA1_5 algorithms
+* [`d26db82`] Direct Encryption can't have a wrong key
+* [`bf9ecba`] test the examples from the README
+* [`085c87a`] Start work on Key Encryption Algorithms
+* [`eb0aa3e`] Recommend usage of new
+* [`7084b3a`] Fix README for signatures
+* [`8836326`] Signature methods now expect and return buffers
+
 ## 2015-09-22, Version 0.2.0
 
 ### Notable Changes
