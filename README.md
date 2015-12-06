@@ -25,6 +25,14 @@ ES384 | ECDSA using P-384 curve and SHA-384 hash algorithm
 ES512 | ECDSA using P-521 curve and SHA-512 hash algorithm
 none | No integrity protection
 
+"alg" Header Parameter | Key Encryption Algorithm | Additional paramters needed
+-----------------------|------------------------- | ---------------------------
+RSA1_5 | Key wrapping using RSAES-PKCS1-v1_5 | none
+dir | Direct use of key as CEK | none
+A128GCMKW | Key wrapping using AES-GCM with 128-bit key | iv, tag for unwrapping
+A192GCMKW | Key wrapping using AES-GCM with 192-bit key | iv, tag for unwrapping
+A256GCMKW | Key wrapping using AES-GCM with 256-bit key | iv, tag for unwrapping
+
 The following content encryption algorithms are supported:
 
 "enc" Header Parameter | Content Encryption Algorithm
@@ -35,9 +43,6 @@ A256CBC-HS512 | AES CBC using 256-bit key with SHA-512 as HMAC
 A128GCM | AES GCM using 128-bit key
 A192GCM | AES GCM using 192-bit key
 A256GCM | AES GCM using 256-bit key
-
-Currently no key encryption algorithms are
-supported.
 
 ### jwa(algorithm)
 Creates a new `jwa` object with `sign` and `verify` or `encrypt` and `decrypt` methods, depending 
