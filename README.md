@@ -25,6 +25,8 @@ ES384 | ECDSA using P-384 curve and SHA-384 hash algorithm
 ES512 | ECDSA using P-521 curve and SHA-512 hash algorithm
 none | No integrity protection
 
+The following key encryption algorithms are supported:
+
 "alg" Header Parameter | Key Encryption Algorithm | Additional paramters needed
 -----------------------|------------------------- | ---------------------------
 RSA1_5 | Key wrapping using RSAES-PKCS1-v1_5 | none

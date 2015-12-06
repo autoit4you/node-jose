@@ -1,5 +1,21 @@
 # jose ChangeLog
 
+## 2015-12-06, Version 0.3.2
+
+### Notable Changes
+
+None
+
+### Known Issues
+
+None
+
+### Commits
+
+* [`c445eb3`] Release 0.3.1
+* [`dbc6db2`] Amended documentation
+* [`1466535`] Release 0.3.0
+
 ## 2015-12-01, Version 0.3.0
 
 ### Notable Changes
@@ -12,7 +28,7 @@
 
 ### Known Issues
 
-None
+* README.md not fully up-to-date
 
 ### Commits
 
